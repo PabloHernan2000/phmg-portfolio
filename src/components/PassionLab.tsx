@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { AUDIO_PLAYLIST } from '../data/portfolioData';
 import { AudioTrack } from '../types';
-import { SpotifyPlayer } from './SpotifyPlayer';
+import { SpotifyPlaylistEmbed } from './SpotifyPlaylistEmbed';
 import { 
   Trophy, 
   Gamepad2, 
@@ -348,11 +348,11 @@ export const PassionLab: React.FC<PassionLabProps> = ({
           </div>
         )}
 
-        {/* TAB 3: SPOTIFY REALTIME & LUIS MIGUEL */}
+        {/* TAB 3: SPOTIFY PLAYLIST OFICIAL & SINTETIZADOR LUISMI */}
         {activeTab === 'music' && (
           <div className="space-y-6">
-            {/* Realtime Spotify Player Card */}
-            <SpotifyPlayer />
+            {/* Real Official Spotify Playlist Embed */}
+            <SpotifyPlaylistEmbed />
 
             {/* Offline Ambient Synthesizer & Vinyl */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 p-6 sm:p-8 rounded-2xl bg-[#0d0f15] border border-white/[0.08]">

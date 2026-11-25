@@ -268,3 +268,17 @@ export const AUDIO_PLAYLIST: AudioTrack[] = [
   { id: 'track-2', title: 'La Incondicional (Synth Atmosphere)', artist: 'Inspirado en Luis Miguel', genre: 'Cyber Ambient', duration: '4:10', bpm: 84 },
   { id: 'track-3', title: 'Sol, Arena y Código', artist: 'Inspirado en Luis Miguel', genre: 'Acoustic Groove', duration: '3:20', bpm: 98 },
 ];
+
+/**
+ * CONFIGURACIÓN DE TU PLAYLIST DE SPOTIFY
+ * 
+ * Cuando crees tu playlist en Spotify:
+ * 1. Dale a Compartir -> "Copiar enlace a la playlist"
+ * 2. Pega ese enlace aquí en `playlistUrlOrId`:
+ */
+export const SPOTIFY_PLAYLIST_CONFIG = {
+  title: 'Pablo Muñoz — Sound of Coding & Luis Miguel',
+  description: 'Playlist curada especialmente para explorar este portafolio y programar con enfoque total.',
+  // Pega aquí el enlace de tu playlist (o el ID):
+  playlistUrlOrId: 'https://open.spotify.com/playlist/37i9dQZF1DXcBWIGoYBM5M', // Muestra: 'This Is Luis Miguel' oficial
+};
