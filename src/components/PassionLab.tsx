@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { AUDIO_PLAYLIST } from '../data/portfolioData';
 import { AudioTrack } from '../types';
+import { SpotifyPlayer } from './SpotifyPlayer';
 import { 
   Trophy, 
   Gamepad2, 
@@ -10,7 +11,8 @@ import {
   Sparkles, 
   ShieldAlert, 
   Award,
-  Zap
+  Zap,
+  Radio
 } from 'lucide-react';
 import { sound } from '../utils/audio';
 
@@ -108,12 +110,12 @@ export const PassionLab: React.FC<PassionLabProps> = ({
               }}
               className={`tactile-btn flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-mono transition-all ${
                 activeTab === 'music'
-                  ? 'bg-amber-500/20 border border-amber-500/40 text-amber-300'
+                  ? 'bg-[#1DB954]/20 border border-[#1DB954]/40 text-[#1DB954]'
                   : 'text-slate-400 hover:text-white'
               }`}
             >
-              <Disc3 className="w-3.5 h-3.5" />
-              <span>LUIS MIGUEL HI-FI</span>
+              <Radio className="w-3.5 h-3.5" />
+              <span>SPOTIFY & LUISMI</span>
             </button>
           </div>
         </div>
@@ -346,119 +348,125 @@ export const PassionLab: React.FC<PassionLabProps> = ({
           </div>
         )}
 
-        {/* TAB 3: LUIS MIGUEL HI-FI */}
+        {/* TAB 3: SPOTIFY REALTIME & LUIS MIGUEL */}
         {activeTab === 'music' && (
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 p-6 sm:p-8 rounded-2xl bg-[#0d0f15] border border-white/[0.08]">
-            
-            {/* Turntable / Vinyl Player */}
-            <div className="lg:col-span-6 flex flex-col items-center justify-center p-8 rounded-xl bg-gradient-to-b from-[#14161f] to-[#0c0d12] border border-white/[0.08] relative">
-              {/* Spinning Vinyl */}
-              <div className="relative w-48 h-48 sm:w-60 sm:h-60 rounded-full bg-[#111] border-4 border-[#222] shadow-[0_0_35px_rgba(0,0,0,0.8)] flex items-center justify-center">
-                {/* Vinyl Grooves */}
-                <div className="absolute inset-3 rounded-full border border-white/[0.04]" />
-                <div className="absolute inset-8 rounded-full border border-white/[0.04]" />
-                <div className="absolute inset-14 rounded-full border border-white/[0.04]" />
-                
-                {/* Center Record Label */}
-                <div className={`w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-tr from-amber-600 to-yellow-400 border-2 border-black flex flex-col items-center justify-center text-center p-1 shadow-md ${
-                  isBgmPlaying ? 'spin-slow' : 'spin-slow spin-slow-paused'
-                }`}>
-                  <span className="text-[9px] font-bold font-mono text-black uppercase tracking-tighter">
-                    LUISMI HI-FI
-                  </span>
-                  <span className="text-[8px] font-mono text-black/80">
-                    CODING VOL. 1
-                  </span>
-                  <div className="w-3 h-3 rounded-full bg-black mt-1" />
+          <div className="space-y-6">
+            {/* Realtime Spotify Player Card */}
+            <SpotifyPlayer />
+
+            {/* Offline Ambient Synthesizer & Vinyl */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 p-6 sm:p-8 rounded-2xl bg-[#0d0f15] border border-white/[0.08]">
+              
+              {/* Turntable / Vinyl Player */}
+              <div className="lg:col-span-6 flex flex-col items-center justify-center p-8 rounded-xl bg-gradient-to-b from-[#14161f] to-[#0c0d12] border border-white/[0.08] relative">
+                {/* Spinning Vinyl */}
+                <div className="relative w-48 h-48 sm:w-60 sm:h-60 rounded-full bg-[#111] border-4 border-[#222] shadow-[0_0_35px_rgba(0,0,0,0.8)] flex items-center justify-center">
+                  {/* Vinyl Grooves */}
+                  <div className="absolute inset-3 rounded-full border border-white/[0.04]" />
+                  <div className="absolute inset-8 rounded-full border border-white/[0.04]" />
+                  <div className="absolute inset-14 rounded-full border border-white/[0.04]" />
+                  
+                  {/* Center Record Label */}
+                  <div className={`w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-tr from-amber-600 to-yellow-400 border-2 border-black flex flex-col items-center justify-center text-center p-1 shadow-md ${
+                    isBgmPlaying ? 'spin-slow' : 'spin-slow spin-slow-paused'
+                  }`}>
+                    <span className="text-[9px] font-bold font-mono text-black uppercase tracking-tighter">
+                      LUISMI HI-FI
+                    </span>
+                    <span className="text-[8px] font-mono text-black/80">
+                      CODING VOL. 1
+                    </span>
+                    <div className="w-3 h-3 rounded-full bg-black mt-1" />
+                  </div>
                 </div>
-              </div>
 
-              {/* Tonearm Simulation */}
-              <div className="mt-6 flex items-center gap-3">
-                <button
-                  onClick={() => {
-                    sound.playClick();
-                    onToggleBgm();
-                  }}
-                  className={`tactile-btn flex items-center gap-2 px-6 py-2.5 rounded-full font-mono text-xs font-semibold shadow-lg transition-all ${
-                    isBgmPlaying
-                      ? 'bg-amber-500 hover:bg-amber-400 text-slate-950 shadow-amber-500/25'
-                      : 'bg-white/[0.08] hover:bg-white/[0.15] text-white border border-white/[0.1]'
-                  }`}
-                >
-                  {isBgmPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
-                  <span>{isBgmPlaying ? 'PAUSAR SUAVE (LO-FI)' : 'REPRODUCIR AMBIENTE LUISMI'}</span>
-                </button>
-              </div>
-
-              {/* Sound visualizer wave bars */}
-              {isBgmPlaying && (
-                <div className="mt-4 flex items-center gap-1 h-6">
-                  {[40, 75, 55, 90, 60, 80, 45, 95, 70, 85].map((h, i) => (
-                    <div
-                      key={i}
-                      className="w-1 bg-amber-400 rounded-full animate-pulse"
-                      style={{ height: `${h}%`, animationDelay: `${i * 120}ms` }}
-                    />
-                  ))}
+                {/* Tonearm Simulation */}
+                <div className="mt-6 flex items-center gap-3">
+                  <button
+                    onClick={() => {
+                      sound.playClick();
+                      onToggleBgm();
+                    }}
+                    className={`tactile-btn flex items-center gap-2 px-6 py-2.5 rounded-full font-mono text-xs font-semibold shadow-lg transition-all ${
+                      isBgmPlaying
+                        ? 'bg-amber-500 hover:bg-amber-400 text-slate-950 shadow-amber-500/25'
+                        : 'bg-white/[0.08] hover:bg-white/[0.15] text-white border border-white/[0.1]'
+                    }`}
+                  >
+                    {isBgmPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+                    <span>{isBgmPlaying ? 'PAUSAR SUAVE (LO-FI)' : 'REPRODUCIR AMBIENTE LUISMI'}</span>
+                  </button>
                 </div>
-              )}
-            </div>
 
-            {/* Liner Notes & Playlist */}
-            <div className="lg:col-span-6 flex flex-col justify-between space-y-6">
-              <div>
-                <span className="text-xs font-mono text-amber-400 font-semibold uppercase tracking-wider">
-                  SOUNDTRACK DEL PROGRAMADOR // LUIS MIGUEL EN VIVO & CHILL
-                </span>
-                <h3 className="text-2xl font-bold text-white tracking-tight mt-1">
-                  Música de Fondo para Sesiones de Alta Concentración
-                </h3>
-                <p className="mt-2 text-sm text-slate-300 leading-relaxed">
-                  Generado enteramente en tiempo real mediante síntesis con la Web Audio API (cero descargas pesadas). 
-                  Acordes mayores y séptimas inspirados en el sonido latino de los años 90 para refactorizar con calma y precisión.
-                </p>
+                {/* Sound visualizer wave bars */}
+                {isBgmPlaying && (
+                  <div className="mt-4 flex items-center gap-1 h-6">
+                    {[40, 75, 55, 90, 60, 80, 45, 95, 70, 85].map((h, i) => (
+                      <div
+                        key={i}
+                        className="w-1 bg-amber-400 rounded-full animate-pulse"
+                        style={{ height: `${h}%`, animationDelay: `${i * 120}ms` }}
+                      />
+                    ))}
+                  </div>
+                )}
               </div>
 
-              {/* Tracklist Selector */}
-              <div className="space-y-2">
-                {AUDIO_PLAYLIST.map((track) => {
-                  const isCurrent = selectedTrack.id === track.id;
-                  return (
-                    <div
-                      key={track.id}
-                      onClick={() => {
-                        setSelectedTrack(track);
-                        sound.playClick();
-                        if (!isBgmPlaying) onToggleBgm();
-                      }}
-                      className={`p-3.5 rounded-xl border transition-all cursor-pointer flex items-center justify-between ${
-                        isCurrent
-                          ? 'bg-amber-500/10 border-amber-500/40'
-                          : 'bg-white/[0.02] border-white/[0.06] hover:bg-white/[0.05]'
-                      }`}
-                    >
-                      <div className="flex items-center gap-3">
-                        <div className={`p-2 rounded-lg ${isCurrent ? 'bg-amber-500/20 text-amber-300' : 'bg-white/[0.04] text-slate-400'}`}>
-                          <Disc3 className={`w-4 h-4 ${isCurrent && isBgmPlaying ? 'animate-spin' : ''}`} />
+              {/* Liner Notes & Playlist */}
+              <div className="lg:col-span-6 flex flex-col justify-between space-y-6">
+                <div>
+                  <span className="text-xs font-mono text-amber-400 font-semibold uppercase tracking-wider">
+                    SINTETIZADOR SOBERANO // AUDIO AMBIENTAL
+                  </span>
+                  <h3 className="text-2xl font-bold text-white tracking-tight mt-1">
+                    Sesiones de Programación con Acordes Relajantes
+                  </h3>
+                  <p className="mt-2 text-sm text-slate-300 leading-relaxed">
+                    Si no tienes Spotify activo en este momento, puedes activar este sintetizador Web Audio API local. 
+                    Acordes cálidos inspirados en las baladas de Luis Miguel para concentrarte en el código.
+                  </p>
+                </div>
+
+                {/* Tracklist Selector */}
+                <div className="space-y-2">
+                  {AUDIO_PLAYLIST.map((trackItem) => {
+                    const isCurrent = selectedTrack.id === trackItem.id;
+                    return (
+                      <div
+                        key={trackItem.id}
+                        onClick={() => {
+                          setSelectedTrack(trackItem);
+                          sound.playClick();
+                          if (!isBgmPlaying) onToggleBgm();
+                        }}
+                        className={`p-3.5 rounded-xl border transition-all cursor-pointer flex items-center justify-between ${
+                          isCurrent
+                            ? 'bg-amber-500/10 border-amber-500/40'
+                            : 'bg-white/[0.02] border-white/[0.06] hover:bg-white/[0.05]'
+                        }`}
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className={`p-2 rounded-lg ${isCurrent ? 'bg-amber-500/20 text-amber-300' : 'bg-white/[0.04] text-slate-400'}`}>
+                            <Disc3 className={`w-4 h-4 ${isCurrent && isBgmPlaying ? 'animate-spin' : ''}`} />
+                          </div>
+                          <div>
+                            <div className="text-xs font-semibold text-white">{trackItem.title}</div>
+                            <div className="text-[11px] font-mono text-slate-400">{trackItem.genre} • {trackItem.bpm} BPM</div>
+                          </div>
                         </div>
-                        <div>
-                          <div className="text-xs font-semibold text-white">{track.title}</div>
-                          <div className="text-[11px] font-mono text-slate-400">{track.genre} • {track.bpm} BPM</div>
-                        </div>
+                        <span className="text-xs font-mono text-slate-500">{trackItem.duration}</span>
                       </div>
-                      <span className="text-xs font-mono text-slate-500">{track.duration}</span>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
+                </div>
+
+                <div className="text-xs font-mono text-slate-500 flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  <span>MODO DUAL: Spotify API en tiempo real + Web Audio Sintetizador local</span>
+                </div>
               </div>
 
-              <div className="text-xs font-mono text-slate-500 flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                <span>MOTOR SINTETIZADOR: Web Audio API Oscillator (Chords Fmaj9 - Em9 - Dm9 - Cmaj7)</span>
-              </div>
             </div>
-
           </div>
         )}
 
