@@ -279,6 +279,5 @@ export const AUDIO_PLAYLIST: AudioTrack[] = [
 export const SPOTIFY_PLAYLIST_CONFIG = {
   title: 'Pablo Muñoz — Sound of Coding & Luis Miguel',
   description: 'Playlist curada especialmente para explorar este portafolio y programar con enfoque total.',
-  // Cuando tu playlist esté en modo "Pública", pega aquí tu enlace (ej: https://open.spotify.com/playlist/6GV7FJfNjmasyEqyU7HzzX)
-  playlistUrlOrId: 'https://open.spotify.com/playlist/37i9dQZF1DXcBWIGoYBM5M', // Muestra pública activa: 'This Is Luis Miguel'
+  playlistUrlOrId: 'https://open.spotify.com/playlist/6GV7FJfNjmasyEqyU7HzzX?si=Hld7XZXlScWVWfCswXeRAA&utm_source=copy-link&pi=QCv_JQr3S5CSI&pt_success=1&nd=1&dlsi=c87c7818fa1749ea', // Muestra: 'This Is Luis Miguel' oficial
 };

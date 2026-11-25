@@ -8,6 +8,7 @@ import { ExperienceTimeline } from './components/ExperienceTimeline';
 import { SecurityContact } from './components/SecurityContact';
 import { Footer } from './components/Footer';
 import { CommandPalette } from './components/CommandPalette';
+import { FloatingMusicPlayer } from './components/FloatingMusicPlayer';
 import { sound } from './utils/audio';
 
 export function App() {
@@ -76,7 +77,7 @@ export function App() {
       />
 
       {/* Page Content */}
-      <main>
+      <main className="pb-24">
         <Hero />
         <SystemTopology />
         <WarStories />
@@ -92,6 +93,14 @@ export function App() {
       </main>
 
       <Footer />
+
+      {/* Persistent Floating Media Player */}
+      <FloatingMusicPlayer
+        isBgmPlaying={isBgmPlaying}
+        onToggleBgm={handleToggleBgm}
+        isAudioMuted={isAudioMuted}
+        onToggleMute={handleToggleMute}
+      />
 
       {/* Global Command Palette */}
       <CommandPalette
