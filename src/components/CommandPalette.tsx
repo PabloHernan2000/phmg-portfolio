@@ -9,7 +9,8 @@ import {
   ExternalLink, 
   X,
   Radio,
-  Volume2
+  Volume2,
+  FileText
 } from 'lucide-react';
 import { sound } from '../utils/audio';
 
@@ -108,10 +109,23 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       }
     },
     {
+      id: 'cv',
+      title: 'Descargar Curriculum Vitae (PDF)',
+      subtitle: 'Guardar archivo oficial en PDF actualizado',
+      icon: <FileText className="w-4 h-4 text-emerald-400" />,
+      action: () => {
+        const link = document.createElement('a');
+        link.href = '/CV_Pablo_Hernan_Munoz_Garcia.pdf';
+        link.download = 'CV_Pablo_Hernan_Munoz_Garcia.pdf';
+        link.click();
+        onClose();
+      }
+    },
+    {
       id: 'contact',
-      title: 'Contacto Cifrado & PGP',
+      title: 'Contacto Profesional',
       subtitle: 'Ir a terminal de transmisión y copiar correo',
-      icon: <Mail className="w-4 h-4 text-emerald-400" />,
+      icon: <Mail className="w-4 h-4 text-blue-400" />,
       action: () => {
         window.location.hash = '#contact';
         onClose();

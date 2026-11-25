@@ -1,33 +1,19 @@
 import React, { useState } from 'react';
-import { Mail, Copy, Check, ExternalLink, Key, Lock, Send } from 'lucide-react';
+import { Mail, Copy, Check, ExternalLink, Lock, Send, FileText, Download } from 'lucide-react';
 import { sound } from '../utils/audio';
 
 export const SecurityContact: React.FC = () => {
   const [copiedEmail, setCopiedEmail] = useState<boolean>(false);
-  const [copiedPgp, setCopiedPgp] = useState<boolean>(false);
   const [formSubmitted, setFormSubmitted] = useState<boolean>(false);
   const [formState, setFormState] = useState({ name: '', email: '', message: '' });
 
   const email = 'phernanmg@gmail.com';
-  const pgpKey = `-----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: OpenPGP.js v4.10.10
-Comment: Pablo Hernan Munoz Garcia - Full-Stack & CyberSec Ops
-
-mQENBF/Z8f4BCADK9x2L6kQeP... [PHMG-SEC-KEY-ID: 0x9B4E21A4]
------END PGP PUBLIC KEY BLOCK-----`;
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(email);
     sound.playTelemetry();
     setCopiedEmail(true);
     setTimeout(() => setCopiedEmail(false), 2000);
-  };
-
-  const handleCopyPgp = () => {
-    navigator.clipboard.writeText(pgpKey);
-    sound.playTelemetry();
-    setCopiedPgp(true);
-    setTimeout(() => setCopiedPgp(false), 2000);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -48,19 +34,19 @@ mQENBF/Z8f4BCADK9x2L6kQeP... [PHMG-SEC-KEY-ID: 0x9B4E21A4]
         <div className="mb-12">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono mb-3">
             <Lock className="w-3.5 h-3.5" />
-            CANAL DE COMUNICACIÓN & CIBERSEGURIDAD
+            CANAL DE CONTACTO PROFESIONAL
           </div>
           <h2 className="text-2xl sm:text-4xl font-bold text-white tracking-tight">
-            Establecer Enlace Directo
+            Contacto & Oportunidades
           </h2>
           <p className="mt-2 text-sm sm:text-base text-slate-400 max-w-2xl">
-            Disponible para roles de ingeniería de software senior, arquitectura de sistemas distribuidos y consultoría en misión crítica.
+            Disponible para roles de ingeniería de software senior, arquitectura de sistemas distribuidos y desarrollo de software de misión crítica.
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           
-          {/* Quick Connect & Cryptographic Channels */}
+          {/* Quick Connect & CV Channels */}
           <div className="lg:col-span-5 space-y-4">
             
             {/* Email Card with 1-Click Copy */}
@@ -93,26 +79,28 @@ mQENBF/Z8f4BCADK9x2L6kQeP... [PHMG-SEC-KEY-ID: 0x9B4E21A4]
               </div>
             </div>
 
-            {/* PGP Public Key Clearance Card */}
+            {/* Curriculum Vitae Download Card */}
             <div className="p-6 rounded-xl bg-[#0d0f15] border border-white/[0.08]">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-xs font-mono text-slate-400">SEGURIDAD CRIPTOGRÁFICA</span>
-                <Key className="w-4 h-4 text-amber-400" />
+                <span className="text-xs font-mono text-slate-400">CURRICULUM VITAE</span>
+                <FileText className="w-4 h-4 text-emerald-400" />
               </div>
               <div className="text-sm font-bold text-white mb-1">
-                Llave Pública PGP (Zero-Trust)
+                CV Oficial en PDF (Actualizado)
               </div>
-              <p className="text-xs text-slate-400 mb-3">
-                Para comunicaciones cifradas end-to-end sobre auditorías o arquitectura crítica.
+              <p className="text-xs text-slate-400 mb-4 leading-relaxed">
+                Descarga mi resumen profesional completo con detalle de stack, experiencia en gobierno y formación académica.
               </p>
 
-              <button
-                onClick={handleCopyPgp}
-                className="tactile-btn w-full flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] text-slate-300 hover:text-white text-xs font-mono transition-colors"
+              <a
+                href="/CV_Pablo_Hernan_Munoz_Garcia.pdf"
+                download="CV_Pablo_Hernan_Munoz_Garcia.pdf"
+                onClick={() => sound.playTelemetry()}
+                className="tactile-btn w-full flex items-center justify-center gap-2 py-2.5 px-3 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold text-xs font-mono shadow-[0_0_15px_rgba(16,185,129,0.15)] transition-all"
               >
-                {copiedPgp ? <Check className="w-3.5 h-3.5 text-amber-400" /> : <Copy className="w-3.5 h-3.5" />}
-                <span>{copiedPgp ? '¡LLAVE PGP COPIADA!' : 'COPIAR LLAVE PGP'}</span>
-              </button>
+                <Download className="w-3.5 h-3.5" />
+                <span>DESCARGAR CV EN PDF</span>
+              </a>
             </div>
 
             {/* Social & GitHub Links */}
