@@ -26,7 +26,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         
         {/* Brand / Callout */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 shrink-0">
           <a
             href="#hero"
             onClick={() => sound.playClick()}
@@ -45,60 +45,53 @@ export const Navbar: React.FC<NavbarProps> = ({
             </div>
           </a>
 
-          {/* Telemetry Live Badge */}
-          <div className="hidden md:flex items-center gap-2 pl-3 border-l border-white/[0.08]">
-            <span className="relative flex h-2 w-2">
+          {/* Telemetry Live Badge (No-wrap and compact) */}
+          <div className="hidden xl:flex items-center gap-2 pl-3 border-l border-white/[0.08] shrink-0 whitespace-nowrap">
+            <span className="relative flex h-2 w-2 shrink-0">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
             </span>
-            <span className="text-xs font-mono text-slate-400">
-              <span className="text-white font-medium">70,000+</span> PASSENGERS ON-LINE
+            <span className="text-xs font-mono text-slate-400 whitespace-nowrap">
+              <span className="text-white font-medium">70,000+</span> En Línea
             </span>
           </div>
         </div>
 
         {/* Navigation Anchors */}
-        <nav className="hidden lg:flex items-center gap-6 text-xs font-mono">
+        <nav className="hidden lg:flex items-center gap-5 text-xs font-mono shrink-0">
           <a
             href="#topology"
             onClick={() => sound.playClick()}
-            className="text-slate-400 hover:text-white transition-colors"
+            className="text-slate-400 hover:text-white transition-colors whitespace-nowrap"
           >
-            01 // TOPOLOGÍA
+            Topología
           </a>
           <a
             href="#war-stories"
             onClick={() => sound.playClick()}
-            className="text-slate-400 hover:text-white transition-colors"
+            className="text-slate-400 hover:text-white transition-colors whitespace-nowrap"
           >
-            02 // RESCATE_LEGACY
+            War Stories
           </a>
           <a
             href="#passion-lab"
             onClick={() => sound.playClick()}
-            className="text-slate-400 hover:text-white transition-colors flex items-center gap-1.5"
+            className="text-slate-400 hover:text-white transition-colors flex items-center gap-1.5 whitespace-nowrap"
           >
-            03 // PASSION_LAB
+            Passion Lab
             <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
           </a>
           <a
             href="#experience"
             onClick={() => sound.playClick()}
-            className="text-slate-400 hover:text-white transition-colors"
+            className="text-slate-400 hover:text-white transition-colors whitespace-nowrap"
           >
-            04 // TRAYECTORIA
-          </a>
-          <a
-            href="#contact"
-            onClick={() => sound.playClick()}
-            className="text-slate-400 hover:text-white transition-colors"
-          >
-            05 // CONTACTO
+            Trayectoria
           </a>
         </nav>
 
         {/* Controls Bar */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 shrink-0">
           {/* Luismi Vinyl Button */}
           <button
             onClick={() => {
