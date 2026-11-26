@@ -277,7 +277,8 @@ export const AUDIO_PLAYLIST: AudioTrack[] = [
  * 2. Pega ese enlace aquí en `playlistUrlOrId`:
  */
 export const SPOTIFY_PLAYLIST_CONFIG = {
-  title: 'Pablo Muñoz — Sound of Coding & Luis Miguel',
-  description: 'Playlist curada especialmente para explorar este portafolio y programar con enfoque total.',
-  playlistUrlOrId: 'https://open.spotify.com/playlist/6GV7FJfNjmasyEqyU7HzzX?si=Hld7XZXlScWVWfCswXeRAA&utm_source=copy-link&pi=QCv_JQr3S5CSI&pt_success=1&nd=1&dlsi=c87c7818fa1749ea', // Muestra: 'This Is Luis Miguel' oficial
+  title: 'Work — Playlist Oficial de Pablo Hernán',
+  description: '95 canciones seleccionadas para programar y explorar el portafolio.',
+  playlistUrlOrId: 'https://open.spotify.com/playlist/6GV7FJfNjmasyEqyU7HzzX',
+  playlistId: '6GV7FJfNjmasyEqyU7HzzX',
 };

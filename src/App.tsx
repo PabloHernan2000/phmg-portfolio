@@ -93,12 +93,7 @@ export function App() {
       <Footer />
 
       {/* Persistent Floating Media Player */}
-      <FloatingMusicPlayer
-        isBgmPlaying={isBgmPlaying}
-        onToggleBgm={handleToggleBgm}
-        isAudioMuted={isAudioMuted}
-        onToggleMute={handleToggleMute}
-      />
+      <FloatingMusicPlayer />
 
       {/* Global Command Palette */}
       <CommandPalette
