@@ -33,7 +33,7 @@ export const FloatingMusicPlayer: React.FC = () => {
                 {SPOTIFY_PLAYLIST_CONFIG.title}
               </span>
               <span className="text-[10px] font-mono text-emerald-400 truncate block">
-                ● 95 CANCIONES // LUIS MIGUEL & FOCUS PLAYLIST
+                ● Canciones
               </span>
             </div>
           </div>
@@ -58,7 +58,7 @@ export const FloatingMusicPlayer: React.FC = () => {
                 sound.playClick();
                 setIsExpanded(prev => !prev);
               }}
-              title={isExpanded ? "Minimizar reproductor a barra compacta" : "Expandir lista completa de 95 canciones"}
+              title={isExpanded ? "Minimizar reproductor a barra compacta" : "Expandir lista de canciones"}
               className="tactile-btn p-1.5 rounded-md bg-white/[0.05] hover:bg-white/[0.1] border border-white/[0.1] text-slate-300 hover:text-white transition-colors"
             >
               {isExpanded ? (
@@ -68,7 +68,7 @@ export const FloatingMusicPlayer: React.FC = () => {
                 </div>
               ) : (
                 <div className="flex items-center gap-1 text-[11px] font-mono text-emerald-400">
-                  <span className="hidden sm:inline">Ver 95 canciones</span>
+                  <span className="hidden sm:inline">Ver canciones</span>
                   <ChevronUp className="w-3.5 h-3.5" />
                 </div>
               )}
