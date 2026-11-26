@@ -82,8 +82,6 @@ export function App() {
         <SystemTopology />
         <WarStories />
         <PassionLab
-          isBgmPlaying={isBgmPlaying}
-          onToggleBgm={handleToggleBgm}
           isScanlinesActive={isScanlinesActive}
           onToggleScanlines={handleToggleScanlines}
           onOpenCommand={() => setIsCommandOpen(true)}
