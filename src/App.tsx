@@ -9,6 +9,8 @@ import { SecurityContact } from './components/SecurityContact';
 import { Footer } from './components/Footer';
 import { CommandPalette } from './components/CommandPalette';
 import { FloatingMusicPlayer } from './components/FloatingMusicPlayer';
+import { ScrollProgress } from './components/ScrollProgress';
+import { ScrollToTop } from './components/ScrollToTop';
 import { sound } from './utils/audio';
 
 export function App() {
@@ -60,6 +62,9 @@ export function App() {
 
   return (
     <div className="relative min-h-screen bg-[#07080b] text-[#94a3b8]">
+      {/* Telemetry Scroll Progress Bar */}
+      <ScrollProgress />
+
       {/* CRT Scanline Overlay when active */}
       {isScanlinesActive && (
         <div className="fixed inset-0 z-50 scanlines-overlay pointer-events-none" />
@@ -94,6 +99,9 @@ export function App() {
 
       {/* Persistent Floating Media Player */}
       <FloatingMusicPlayer />
+
+      {/* Quick Scroll-To-Top HUD button */}
+      <ScrollToTop />
 
       {/* Global Command Palette */}
       <CommandPalette

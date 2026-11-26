@@ -13,6 +13,8 @@ import {
   ArrowRight,
   Play
 } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
+import { RevealOnScroll } from './RevealOnScroll';
 import { sound } from '../utils/audio';
 
 export const SystemTopology: React.FC = () => {
@@ -62,94 +64,109 @@ export const SystemTopology: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
-          <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-mono mb-3">
-              <Network className="w-3.5 h-3.5" />
-              SISTEMA INTEGRADO DE TRANSPORTE ESTATAL
+        <RevealOnScroll>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-mono mb-3">
+                <Network className="w-3.5 h-3.5" />
+                SISTEMA INTEGRADO DE TRANSPORTE ESTATAL
+              </div>
+              <h2 className="text-2xl sm:text-4xl font-bold text-white tracking-tight">
+                Topología de Sistemas & Servicios Críticos
+              </h2>
+              <p className="mt-2 text-sm sm:text-base text-slate-400 max-w-2xl">
+                Arquitectura distribuida en producción para más de 70,000 usuarios. Explora los 4 módulos de software y su orquestación en tiempo real.
+              </p>
             </div>
-            <h2 className="text-2xl sm:text-4xl font-bold text-white tracking-tight">
-              Topología de Sistemas & Servicios Críticos
-            </h2>
-            <p className="mt-2 text-sm sm:text-base text-slate-400 max-w-2xl">
-              Arquitectura distribuida en producción para más de 70,000 usuarios. Explora los 4 módulos de software y su orquestación en tiempo real.
-            </p>
-          </div>
 
-          {/* Interactive Simulation Trigger */}
-          <button
-            onClick={runSimulation}
-            disabled={isSimulating}
-            className={`tactile-btn flex items-center gap-2 px-4 py-2 rounded-lg border text-xs font-mono transition-all ${
-              isSimulating
-                ? 'bg-emerald-500/20 border-emerald-500/50 text-emerald-300'
-                : 'bg-white/[0.04] border-white/[0.1] text-slate-300 hover:text-white hover:bg-white/[0.08]'
-            }`}
-          >
-            <Play className={`w-3.5 h-3.5 ${isSimulating ? 'animate-spin text-emerald-400' : 'text-emerald-400'}`} />
-            <span>{isSimulating ? 'SIMULANDO TRÁFICO END-TO-END...' : 'SIMULAR FLUJO DE PASAJERO'}</span>
-          </button>
-        </div>
+            {/* Interactive Simulation Trigger */}
+            <button
+              onClick={runSimulation}
+              disabled={isSimulating}
+              className={`tactile-btn flex items-center gap-2 px-4 py-2 rounded-lg border text-xs font-mono transition-all ${
+                isSimulating
+                  ? 'bg-emerald-500/20 border-emerald-500/50 text-emerald-300'
+                  : 'bg-white/[0.04] border-white/[0.1] text-slate-300 hover:text-white hover:bg-white/[0.08]'
+              }`}
+            >
+              <Play className={`w-3.5 h-3.5 ${isSimulating ? 'animate-spin text-emerald-400' : 'text-emerald-400'}`} />
+              <span>{isSimulating ? 'SIMULANDO TRÁFICO END-TO-END...' : 'SIMULAR FLUJO DE PASAJERO'}</span>
+            </button>
+          </div>
+        </RevealOnScroll>
 
         {/* Live Topology Flow Visualizer */}
-        <div className="mb-8 p-4 sm:p-6 rounded-xl bg-[#090b10] border border-white/[0.08] relative overflow-hidden">
-          <div className="text-[11px] font-mono text-slate-500 uppercase tracking-wider mb-4 flex items-center justify-between">
-            <span>MAPA DE FLUJO DISTRIBUIDO (PACHUCA - RED ESTATAL)</span>
-            <span className="text-emerald-400 font-semibold">{isSimulating ? 'ESTADO: TRANSMITIENDO PAQUETES' : 'ESTADO: LATENCIA NOMINAL'}</span>
-          </div>
+        <RevealOnScroll delay={0.1}>
+          <div className="mb-8 p-4 sm:p-6 rounded-xl bg-[#090b10] border border-white/[0.08] relative overflow-hidden">
+            <div className="text-[11px] font-mono text-slate-500 uppercase tracking-wider mb-4 flex items-center justify-between">
+              <span>MAPA DE FLUJO DISTRIBUIDO (PACHUCA - RED ESTATAL)</span>
+              <span className="text-emerald-400 font-semibold">{isSimulating ? 'ESTADO: TRANSMITIENDO PAQUETES' : 'ESTADO: LATENCIA NOMINAL'}</span>
+            </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-            {CORE_PROJECTS.map((proj, idx) => {
-              const isSelected = activeProject.id === proj.id;
-              const isActiveInSimulation = simulationStep === idx + 1;
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+              {CORE_PROJECTS.map((proj, idx) => {
+                const isSelected = activeProject.id === proj.id;
+                const isActiveInSimulation = simulationStep === idx + 1;
 
-              return (
-                <div
-                  key={proj.id}
-                  onClick={() => {
-                    setActiveProject(proj);
-                    sound.playClick();
-                  }}
-                  className={`cursor-pointer p-4 rounded-lg border transition-all relative ${
-                    isActiveInSimulation
-                      ? 'bg-emerald-500/15 border-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.3)]'
-                      : isSelected
-                      ? 'bg-blue-500/10 border-blue-400/50 shadow-[0_0_15px_rgba(59,130,246,0.15)]'
-                      : 'bg-white/[0.02] border-white/[0.06] hover:bg-white/[0.05] hover:border-white/[0.15]'
-                  }`}
-                >
-                  {/* Step Sequence Badge */}
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-black/50 text-slate-400 border border-white/5">
-                      NODE 0{idx + 1}
-                    </span>
-                    <div className="flex items-center gap-1.5">
-                      {getLayerIcon(proj.layer)}
-                      <span className="text-[11px] font-mono text-slate-300 font-medium">{proj.layer}</span>
+                return (
+                  <motion.div
+                    key={proj.id}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => {
+                      setActiveProject(proj);
+                      sound.playClick();
+                    }}
+                    className={`cursor-pointer p-4 rounded-lg border transition-all relative ${
+                      isActiveInSimulation
+                        ? 'bg-emerald-500/15 border-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.3)]'
+                        : isSelected
+                        ? 'bg-blue-500/10 border-blue-400/50 shadow-[0_0_15px_rgba(59,130,246,0.15)]'
+                        : 'bg-white/[0.02] border-white/[0.06] hover:bg-white/[0.05] hover:border-white/[0.15]'
+                    }`}
+                  >
+                    {/* Step Sequence Badge */}
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-black/50 text-slate-400 border border-white/5">
+                        NODE 0{idx + 1}
+                      </span>
+                      <div className="flex items-center gap-1.5">
+                        {getLayerIcon(proj.layer)}
+                        <span className="text-[11px] font-mono text-slate-300 font-medium">{proj.layer}</span>
+                      </div>
                     </div>
-                  </div>
 
-                  <h3 className="text-sm font-semibold text-white tracking-tight mb-1">
-                    {proj.name}
-                  </h3>
-                  <p className="text-[11px] text-slate-400 line-clamp-2">
-                    {proj.tagline}
-                  </p>
+                    <h3 className="text-sm font-semibold text-white tracking-tight mb-1">
+                      {proj.name}
+                    </h3>
+                    <p className="text-[11px] text-slate-400 line-clamp-2">
+                      {proj.tagline}
+                    </p>
 
-                  {/* Flow Arrow for desktop */}
-                  {idx < 3 && (
-                    <div className="hidden lg:block absolute -right-2.5 top-1/2 -translate-y-1/2 z-10 text-slate-600">
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </div>
-                  )}
-                </div>
-              );
-            })}
+                    {/* Flow Arrow for desktop */}
+                    {idx < 3 && (
+                      <div className="hidden lg:block absolute -right-2.5 top-1/2 -translate-y-1/2 z-10 text-slate-600">
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </div>
+                    )}
+                  </motion.div>
+                );
+              })}
+            </div>
           </div>
-        </div>
+        </RevealOnScroll>
 
         {/* Selected Project In-Depth Inspector */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 p-6 sm:p-8 rounded-2xl bg-[#0d0f15] border border-white/[0.08] shadow-2xl">
+        <RevealOnScroll delay={0.2}>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeProject.id}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              className="grid grid-cols-1 lg:grid-cols-12 gap-6 p-6 sm:p-8 rounded-2xl bg-[#0d0f15] border border-white/[0.08] shadow-2xl"
+            >
           
           {/* Left Info Column */}
           <div className="lg:col-span-7 space-y-6">
@@ -239,7 +256,9 @@ export const SystemTopology: React.FC = () => {
             </div>
           </div>
 
-        </div>
+            </motion.div>
+          </AnimatePresence>
+        </RevealOnScroll>
 
       </div>
     </section>

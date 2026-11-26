@@ -7,6 +7,8 @@ import {
   Award,
   Zap
 } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
+import { RevealOnScroll } from './RevealOnScroll';
 import { sound } from '../utils/audio';
 
 interface PassionLabProps {
@@ -45,57 +47,68 @@ export const PassionLab: React.FC<PassionLabProps> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
-          <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-mono mb-3">
-              <Sparkles className="w-3.5 h-3.5" />
-              THE PASSION LAB // FÚTBOL, GAMING & LUIS MIGUEL
+        <RevealOnScroll>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-mono mb-3">
+                <Sparkles className="w-3.5 h-3.5" />
+                THE PASSION LAB // FÚTBOL, GAMING & LUIS MIGUEL
+              </div>
+              <h2 className="text-2xl sm:text-4xl font-bold text-white tracking-tight">
+                Ingeniería con Alma: Táctica, Videojuegos y Buena Música
+              </h2>
+              <p className="mt-2 text-sm sm:text-base text-slate-400 max-w-2xl">
+                Donde la rigurosidad técnica se encuentra con las pasiones personales. Cómo el fútbol explica mi arquitectura y la música acompaña el código.
+              </p>
             </div>
-            <h2 className="text-2xl sm:text-4xl font-bold text-white tracking-tight">
-              Ingeniería con Alma: Táctica, Videojuegos y Buena Música
-            </h2>
-            <p className="mt-2 text-sm sm:text-base text-slate-400 max-w-2xl">
-              Donde la rigurosidad técnica se encuentra con las pasiones personales. Cómo el fútbol explica mi arquitectura y la música acompaña el código.
-            </p>
+
+            {/* Sub-Tabs Selector */}
+            <div className="flex items-center gap-1.5 p-1 rounded-xl bg-[#0d0f15] border border-white/[0.08]">
+              <button
+                onClick={() => {
+                  setActiveTab('football');
+                  sound.playClick();
+                }}
+                className={`tactile-btn flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-mono transition-all ${
+                  activeTab === 'football'
+                    ? 'bg-emerald-500/20 border border-emerald-500/40 text-emerald-300'
+                    : 'text-slate-400 hover:text-white'
+                }`}
+              >
+                <Trophy className="w-3.5 h-3.5" />
+                <span>FÚTBOL TÁCTICO</span>
+              </button>
+
+              <button
+                onClick={() => {
+                  setActiveTab('gaming');
+                  sound.playClick();
+                }}
+                className={`tactile-btn flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-mono transition-all ${
+                  activeTab === 'gaming'
+                    ? 'bg-blue-500/20 border border-blue-500/40 text-blue-300'
+                    : 'text-slate-400 hover:text-white'
+                }`}
+              >
+                <Gamepad2 className="w-3.5 h-3.5" />
+                <span>VIDEOJUEGOS & HUD</span>
+              </button>
+            </div>
           </div>
+        </RevealOnScroll>
 
-          {/* Sub-Tabs Selector */}
-          <div className="flex items-center gap-1.5 p-1 rounded-xl bg-[#0d0f15] border border-white/[0.08]">
-            <button
-              onClick={() => {
-                setActiveTab('football');
-                sound.playClick();
-              }}
-              className={`tactile-btn flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-mono transition-all ${
-                activeTab === 'football'
-                  ? 'bg-emerald-500/20 border border-emerald-500/40 text-emerald-300'
-                  : 'text-slate-400 hover:text-white'
-              }`}
-            >
-              <Trophy className="w-3.5 h-3.5" />
-              <span>FÚTBOL TÁCTICO</span>
-            </button>
-
-            <button
-              onClick={() => {
-                setActiveTab('gaming');
-                sound.playClick();
-              }}
-              className={`tactile-btn flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-mono transition-all ${
-                activeTab === 'gaming'
-                  ? 'bg-blue-500/20 border border-blue-500/40 text-blue-300'
-                  : 'text-slate-400 hover:text-white'
-              }`}
-            >
-              <Gamepad2 className="w-3.5 h-3.5" />
-              <span>VIDEOJUEGOS & HUD</span>
-            </button>
-          </div>
-        </div>
-
-        {/* TAB 1: FÚTBOL TÁCTICO 4-3-3 */}
-        {activeTab === 'football' && (
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 p-6 sm:p-8 rounded-2xl bg-[#0d0f15] border border-white/[0.08]">
+        <RevealOnScroll delay={0.15}>
+          <AnimatePresence mode="wait">
+            {/* TAB 1: FÚTBOL TÁCTICO 4-3-3 */}
+            {activeTab === 'football' && (
+              <motion.div
+                key="football"
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                className="grid grid-cols-1 lg:grid-cols-12 gap-6 p-6 sm:p-8 rounded-2xl bg-[#0d0f15] border border-white/[0.08]"
+              >
             
             {/* The Pitch (Canvas 2D Táctico) */}
             <div className="lg:col-span-7 rounded-xl bg-gradient-to-b from-[#0e2a1b] to-[#0a1e13] border-2 border-emerald-500/30 p-6 relative min-h-[380px] flex flex-col justify-between overflow-hidden shadow-inner">
@@ -241,85 +254,94 @@ export const PassionLab: React.FC<PassionLabProps> = ({
               </div>
             </div>
 
-          </div>
-        )}
+              </motion.div>
+            )}
 
-        {/* TAB 2: VIDEOJUEGOS & HUD */}
-        {activeTab === 'gaming' && (
-          <div className="p-6 sm:p-8 rounded-2xl bg-[#0d0f15] border border-white/[0.08] space-y-8">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-              <div>
-                <h3 className="text-xl font-bold text-white tracking-tight flex items-center gap-2">
-                  <Gamepad2 className="w-5 h-5 text-blue-400" />
-                  Terminal Táctica & Logros Desbloqueados
-                </h3>
-                <p className="text-sm text-slate-400 mt-1">
-                  Atajos rápidos estilo Vim/Raycast, filtros CRT de monitor retro y medallas de ingeniería.
-                </p>
-              </div>
-
-              <div className="flex items-center gap-3">
-                <button
-                  onClick={() => {
-                    sound.playClick();
-                    onToggleScanlines();
-                  }}
-                  className={`tactile-btn px-4 py-2 rounded-lg border text-xs font-mono transition-all ${
-                    isScanlinesActive
-                      ? 'bg-emerald-500/20 border-emerald-500/50 text-emerald-300'
-                      : 'bg-white/[0.04] border-white/[0.1] text-slate-300'
-                  }`}
-                >
-                  FILTRO CRT RETRO: {isScanlinesActive ? 'ON' : 'OFF'}
-                </button>
-
-                <button
-                  onClick={() => {
-                    sound.playCommandOpen();
-                    onOpenCommand();
-                  }}
-                  className="tactile-btn px-4 py-2 rounded-lg bg-blue-500/15 hover:bg-blue-500/25 border border-blue-500/30 text-blue-300 text-xs font-mono flex items-center gap-2"
-                >
-                  <span>ABRIR CONSOLA (⌘K)</span>
-                </button>
-              </div>
-            </div>
-
-            {/* Achievements Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {ACHIEVEMENTS.map((ach, idx) => (
-                <div
-                  key={idx}
-                  onClick={() => sound.playTelemetry()}
-                  className="p-4 rounded-xl bg-black/40 border border-white/[0.08] hover:border-blue-500/30 transition-all cursor-pointer group"
-                >
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="p-2 rounded-lg bg-white/[0.05] border border-white/[0.05]">
-                      {ach.icon}
-                    </div>
-                    <span className="text-[10px] font-mono text-emerald-400 uppercase tracking-wider font-semibold">
-                      DESBLOQUEADO
-                    </span>
+            {/* TAB 2: VIDEOJUEGOS & HUD */}
+            {activeTab === 'gaming' && (
+              <motion.div
+                key="gaming"
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                className="p-6 sm:p-8 rounded-2xl bg-[#0d0f15] border border-white/[0.08] space-y-8"
+              >
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                  <div>
+                    <h3 className="text-xl font-bold text-white tracking-tight flex items-center gap-2">
+                      <Gamepad2 className="w-5 h-5 text-blue-400" />
+                      Terminal Táctica & Logros Desbloqueados
+                    </h3>
+                    <p className="text-sm text-slate-400 mt-1">
+                      Atajos rápidos estilo Vim/Raycast, filtros CRT de monitor retro y medallas de ingeniería.
+                    </p>
                   </div>
-                  <h4 className="text-sm font-semibold text-white group-hover:text-blue-300 transition-colors">
-                    {ach.title}
-                  </h4>
-                  <p className="text-xs text-slate-400 mt-1">
-                    {ach.desc}
-                  </p>
-                </div>
-              ))}
-            </div>
 
-            {/* Keybind Reference */}
-            <div className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06] flex flex-wrap items-center justify-between gap-4 text-xs font-mono text-slate-400">
-              <span className="text-slate-300 font-semibold">ATAJOS GLOBALES ACTIVOS:</span>
-              <span><kbd className="px-1.5 py-0.5 rounded bg-black border border-white/10 text-white">⌘K</kbd> Consola de comandos</span>
-              <span><kbd className="px-1.5 py-0.5 rounded bg-black border border-white/10 text-white">M</kbd> Silenciar audio</span>
-              <span><kbd className="px-1.5 py-0.5 rounded bg-black border border-white/10 text-white">C</kbd> Modo CRT</span>
-            </div>
-          </div>
-        )}
+                  <div className="flex items-center gap-3">
+                    <button
+                      onClick={() => {
+                        sound.playClick();
+                        onToggleScanlines();
+                      }}
+                      className={`tactile-btn px-4 py-2 rounded-lg border text-xs font-mono transition-all ${
+                        isScanlinesActive
+                          ? 'bg-emerald-500/20 border-emerald-500/50 text-emerald-300'
+                          : 'bg-white/[0.04] border-white/[0.1] text-slate-300'
+                      }`}
+                    >
+                      FILTRO CRT RETRO: {isScanlinesActive ? 'ON' : 'OFF'}
+                    </button>
+
+                    <button
+                      onClick={() => {
+                        sound.playCommandOpen();
+                        onOpenCommand();
+                      }}
+                      className="tactile-btn px-4 py-2 rounded-lg bg-blue-500/15 hover:bg-blue-500/25 border border-blue-500/30 text-blue-300 text-xs font-mono flex items-center gap-2"
+                    >
+                      <span>ABRIR CONSOLA (⌘K)</span>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Achievements Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  {ACHIEVEMENTS.map((ach, idx) => (
+                    <div
+                      key={idx}
+                      onClick={() => sound.playTelemetry()}
+                      className="p-4 rounded-xl bg-black/40 border border-white/[0.08] hover:border-blue-500/30 transition-all cursor-pointer group"
+                    >
+                      <div className="flex items-center justify-between mb-2">
+                        <div className="p-2 rounded-lg bg-white/[0.05] border border-white/[0.05]">
+                          {ach.icon}
+                        </div>
+                        <span className="text-[10px] font-mono text-emerald-400 uppercase tracking-wider font-semibold">
+                          DESBLOQUEADO
+                        </span>
+                      </div>
+                      <h4 className="text-sm font-semibold text-white group-hover:text-blue-300 transition-colors">
+                        {ach.title}
+                      </h4>
+                      <p className="text-xs text-slate-400 mt-1">
+                        {ach.desc}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Keybind Reference */}
+                <div className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06] flex flex-wrap items-center justify-between gap-4 text-xs font-mono text-slate-400">
+                  <span className="text-slate-300 font-semibold">ATAJOS GLOBALES ACTIVOS:</span>
+                  <span><kbd className="px-1.5 py-0.5 rounded bg-black border border-white/10 text-white">⌘K</kbd> Consola de comandos</span>
+                  <span><kbd className="px-1.5 py-0.5 rounded bg-black border border-white/10 text-white">M</kbd> Silenciar audio</span>
+                  <span><kbd className="px-1.5 py-0.5 rounded bg-black border border-white/10 text-white">C</kbd> Modo CRT</span>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </RevealOnScroll>
 
       </div>
     </section>

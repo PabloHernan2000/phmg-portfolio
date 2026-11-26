@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ShieldCheck, Activity, Database, Server, ArrowDown, MapPin, ExternalLink, FileCode } from 'lucide-react';
+import { motion } from 'motion/react';
 import { SYSTEM_METRICS } from '../data/portfolioData';
 import { sound } from '../utils/audio';
 
@@ -33,7 +34,12 @@ export const Hero: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Top Tag & Security Badge */}
-        <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          className="flex flex-wrap items-center justify-between gap-3 mb-6"
+        >
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 text-xs font-mono">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
             GOBIERNO DEL ESTADO DE HIDALGO // SISTEMAS DE MISIÓN CRÍTICA
@@ -50,10 +56,15 @@ export const Hero: React.FC = () => {
               HORA SISTEMA: <span className="text-slate-200 font-semibold">{localTime || '16:00:00'}</span> (UTC-6)
             </span>
           </div>
-        </div>
+        </motion.div>
 
         {/* Hero Title & Authoritative Pitch */}
-        <div className="max-w-4xl">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          className="max-w-4xl"
+        >
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.12]">
             Pablo Hernán Muñoz García
           </h1>
@@ -68,10 +79,15 @@ export const Hero: React.FC = () => {
               70,000 usuarios activos
             </strong>, APIs modulares de alto rendimiento con Redis, autenticación biométrica de confianza cero y rescate de sistemas heredados de misión crítica.
           </p>
-        </div>
+        </motion.div>
 
         {/* Action Buttons */}
-        <div className="mt-8 flex flex-wrap items-center gap-3">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-8 flex flex-wrap items-center gap-3"
+        >
           <a
             href="#topology"
             onClick={() => sound.playClick()}
@@ -100,13 +116,20 @@ export const Hero: React.FC = () => {
             <ExternalLink className="w-3.5 h-3.5" />
             GitHub
           </a>
-        </div>
+        </motion.div>
 
         {/* 4 Telemetry Metrics Grid */}
         <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {SYSTEM_METRICS.map((metric, i) => (
-            <div
+            <motion.div
               key={i}
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.5,
+                delay: 0.3 + i * 0.08,
+                ease: [0.16, 1, 0.3, 1],
+              }}
               onClick={() => sound.playTelemetry()}
               className="tactile-card group cursor-pointer relative p-5 rounded-xl bg-[#0d0f15]/80 border border-white/[0.08] hover:border-emerald-500/40 transition-all backdrop-blur-sm"
             >
@@ -132,7 +155,7 @@ export const Hero: React.FC = () => {
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500/60" />
                 {metric.delta}
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
